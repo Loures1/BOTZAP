@@ -13,20 +13,41 @@ not_login = True
 
 while len(driver.find_elements(By.XPATH, '//*[@id="side"]')) == False:
     if not_login == True:
-        print('Aguardando Login')
         not_login = False
     
     time.sleep(1)
 
-time.sleep(3)
+time.sleep(6)
 
 if len(driver.find_elements(By.XPATH, '//*[@id="side"]')) == True:
-    print('Logado')
+    grupo = 'amigos e bonaza'
+    pessoa = 'Newzinho'
     time.sleep(1)
-    element_search = driver.find_element(By.XPATH, '//*[@id="side"]/div[1]/div/label/div/div[2]')
+    element_search = driver.find_element(By.XPATH, "//div[@title='Caixa de texto de pesquisa']")
     element_search.click()
-    pessoa = 'Isa'
     element_search.send_keys(pessoa)
     time.sleep(1)
     element_contato = driver.find_element(By.XPATH, f"//span[@title='{pessoa}']")
     element_contato.click()
+    time.sleep(1)
+    element_mensagem = driver.find_element(By.XPATH, f"//div[@title='Mensagem']")
+    element_mensagem.click()
+    element_mensagem.send_keys('.')
+    time.sleep(1)
+    element_mensagem.send_keys(Keys.ENTER)
+    time.sleep(2)
+    element_search.send_keys(grupo)
+    time.sleep(1)
+    element_contato = driver.find_element(By.XPATH, f"//span[@title='{grupo}']")
+    element_contato.click()
+    time.sleep(1)
+    element_mensagem = driver.find_element(By.XPATH, f"//div[@title='Mensagem']")
+    element_mensagem.send_keys(f'@{pessoa}')
+    time.sleep(1)
+    element_mensagem.send_keys(Keys.TAB)
+    element_mensagem.send_keys(Keys.ENTER)
+    time.sleep(3)
+    driver.close()
+
+
+
