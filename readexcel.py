@@ -14,9 +14,10 @@ def Contatos():
     arquivo_planilha = Planilha()
     if arquivo_planilha != None:
         pd_planilha = pd.read_excel(arquivo_planilha)
-        contatos = pd_planilha['Unnamed: 2'][1:].array
-        return contatos
+        contatos = pd_planilha['Unnamed: 2'][1:]
+        return list(contatos)
     else:
         print('ERROR: MAIS DE UM ARQUIVO EXCEL NA PASTA')
+        
 
 
