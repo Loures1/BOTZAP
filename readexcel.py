@@ -10,6 +10,35 @@ def Planilha():
     else: 
         return None
 
+def Grupos():
+    with open('config/grupos.txt', 'r') as arquivo:
+        grupos = []
+        linhas = arquivo.readlines()
+        for linha in linhas:
+            grupos.append(linha)
+    return(grupos)
+
+def Mensagem():
+    with open('config/mensagem.txt', 'r') as arquivo:
+        mensagens = {'mensagem': '',
+                    'mensagem-grupo': ''}
+        linhas = arquivo.readlines()
+        for linha in linhas:
+            caracteres = ['Mensagem:', 'Mensagem-grupo:', '\n']
+            if 'Mensagem:' in linha:
+                mensagens['mensagem'] = linha
+                for caractere in caracteres:
+                    mensagens['mensagem'] = mensagens['mensagem'].replace(caractere, '')
+            
+            if 'Mensagem-grupo:' in linha:
+                mensagens['mensagem-grupo'] = linha
+                for caractere in caracteres:
+                    mensagens['mensagem-grupo'] = mensagens['mensagem-grupo'].replace(caractere, '')
+        
+    return mensagens
+
+
+
 def Contatos():
     arquivo_planilha = Planilha()
     if arquivo_planilha != None:
@@ -18,6 +47,3 @@ def Contatos():
         return list(contatos)
     else:
         print('ERROR: MAIS DE UM ARQUIVO EXCEL NA PASTA')
-        
-
-
