@@ -1,2 +1,2 @@
-Mensagem: Ola, Tudo bem ?
+Mensagem:
 Mensagem-grupo:
