@@ -10,16 +10,25 @@ def Planilha():
     else: 
         return None
 
+def Contatos():
+    arquivo_planilha = Planilha()
+    if arquivo_planilha != None:
+        pd_planilha = pd.read_excel(arquivo_planilha)
+        contatos = pd_planilha['Unnamed: 2'][1:]
+        return list(contatos)
+    else:
+        print('ERROR: MAIS DE UM ARQUIVO EXCEL NA PASTA')
+
 def Grupos():
-    with open('config/grupos.txt', 'r') as arquivo:
+    with open('config/grupos.txt', 'r', encoding='utf8') as arquivo:
         grupos = []
         linhas = arquivo.readlines()
         for linha in linhas:
-            grupos.append(linha)
+            grupos.append(linha.replace('\n', ''))
     return(grupos)
 
 def Mensagem():
-    with open('config/mensagem.txt', 'r') as arquivo:
+    with open('config/mensagem.txt', 'r', encoding='utf8') as arquivo:
         mensagens = {'mensagem': '',
                     'mensagem-grupo': ''}
         linhas = arquivo.readlines()
@@ -37,13 +46,4 @@ def Mensagem():
         
     return mensagens
 
-
-
-def Contatos():
-    arquivo_planilha = Planilha()
-    if arquivo_planilha != None:
-        pd_planilha = pd.read_excel(arquivo_planilha)
-        contatos = pd_planilha['Unnamed: 2'][1:]
-        return list(contatos)
-    else:
-        print('ERROR: MAIS DE UM ARQUIVO EXCEL NA PASTA')
+Grupos()
