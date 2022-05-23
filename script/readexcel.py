@@ -45,5 +45,3 @@ def Mensagem():
                     mensagens['mensagem-grupo'] = mensagens['mensagem-grupo'].replace(caractere, '')
         
     return mensagens
-
-Grupos()

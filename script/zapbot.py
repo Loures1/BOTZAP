@@ -21,38 +21,37 @@ def Bot():
         grupos = Grupos()
         pessoas = Contatos()
         mensagem = Mensagem()
-        for pessoa in pessoas:
-            element_search = driver.find_element(By.XPATH, "//div[@title='Caixa de texto de pesquisa']")
-            element_search.click()
-            element_search.send_keys(pessoa)
-            time.sleep(1)
-            element_contato = driver.find_element(By.XPATH, f"//span[@title='{pessoa}']")
-            for grupo in grupos:
-                element_grupo = driver.find_elements(By.XPATH, f"//div[@class='_2nY6U vq6sj']//span[@class='ggj6brxn gfz4du6o r7fjleex g0rxnol2 lhj4utae le5p0ye3 l7jjieqr i0jNr'][contains(text(),'{grupo}')]")
-                if len(element_grupo) == 1:
-                    nome_grupo = grupo
-                    break        
-            element_contato.click()
-            time.sleep(1)
-            element_mensagem = driver.find_element(By.XPATH, f"//div[@title='Mensagem']")
-            element_mensagem.click()
-            element_mensagem.send_keys(mensagem['mensagem'])
-            element_mensagem.send_keys(Keys.ENTER)
-            time.sleep(2)
-            element_search.click()
-            element_search.send_keys(nome_grupo)
+        for grupo in grupos:
+            element_nova_conversa = driver.find_element(By.XPATH, "//div[@class='_3yZPA']//div[2]//div[1]")
+            element_nova_conversa.click()
+            time.sleep(0.5)
+            element_pesquisa = driver.find_element(By.XPATH, "//div[@title='Caixa de texto de pesquisa']")
+            time.sleep(0.5)
+            element_pesquisa.send_keys(grupo)
             time.sleep(1)
             element_grupo = driver.find_element(By.XPATH, f"//span[@title='{grupo}']")
             element_grupo.click()
-            time.sleep(1)
+            time.sleep(0.5)
             element_mensagem = driver.find_element(By.XPATH, f"//div[@title='Mensagem']")
             element_mensagem.click()
-            element_mensagem.send_keys(f'@{pessoa}')
-            element_mensagem.send_keys(Keys.TAB)
-            element_mensagem.send_keys(mensagem['mensagem-grupo'])
-            element_mensagem.send_keys(Keys.ENTER)
-            time.sleep(3)
+            pessoas_contatadas = [] 
+            for pessoa in pessoas:
+                element_mensagem.send_keys(f'@{pessoa}')
+                element_mensagem.send_keys(Keys.TAB)
+                element_marcacao = driver.find_elements(By.XPATH, f"//span[@class='copyable-text selectable-text']")
+                if len(element_marcacao) == True:
+                    element_mensagem.clear()
+                    # element_mensagem.send_keys(mensagem['mensagem-grupo'])
+                    # time.sleep(0.5)
+                    # element_mensagem.send_keys(Keys.ENTER)
+                    pessoas_contatadas.append(pessoa)
+                    # time.sleep(3)
+                else:
+                    element_mensagem.clear()
+            for pessoa_contatada in pessoas_contatadas:
+                pessoas.remove(pessoa_contatada)
         driver.close()
         return 'Concluido'
 
 
+        
