@@ -37,15 +37,16 @@ def Bot():
             pessoas_contatadas = [] 
             for pessoa in pessoas:
                 element_mensagem.send_keys(f'@{pessoa}')
+                time.sleep(0.5)
                 element_mensagem.send_keys(Keys.TAB)
+                time.sleep(0.5)
                 element_marcacao = driver.find_elements(By.XPATH, f"//span[@class='copyable-text selectable-text']")
                 if len(element_marcacao) == True:
-                    element_mensagem.clear()
-                    # element_mensagem.send_keys(mensagem['mensagem-grupo'])
-                    # time.sleep(0.5)
-                    # element_mensagem.send_keys(Keys.ENTER)
+                    element_mensagem.send_keys(mensagem['mensagem-grupo'])
+                    time.sleep(0.5)
+                    element_mensagem.send_keys(Keys.ENTER)
                     pessoas_contatadas.append(pessoa)
-                    # time.sleep(3)
+                    time.sleep(2)
                 else:
                     element_mensagem.clear()
             for pessoa_contatada in pessoas_contatadas:

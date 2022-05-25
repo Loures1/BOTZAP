@@ -1,2 +1,2 @@
 Mensagem: ********
-Mensagem-grupo: ola
+Mensagem-grupo:
